@@ -1,0 +1,62 @@
+x-backend: &backend
+  build: ./backend
+  env_file: .env
+  environment:
+    DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-tasks}
+    REDIS_URL: redis://redis:6379/0
+  restart: unless-stopped
+  depends_on:
+    postgres: { condition: service_healthy }
+    redis: { condition: service_healthy }
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-tasks}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-tasks}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    <<: *backend
+    command: sh -c "alembic upgrade head && uvicorn app.app_p:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+
+  worker:
+    <<: *backend
+    command: celery -A app.worker.celery_app.celery_app worker -Q transcription,notifications -l info
+
+  bot:
+    <<: *backend
+    command: python -m app.bot
+    profiles: ["polling"]
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  redisdata:

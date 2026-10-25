@@ -1,0 +1,59 @@
+:root {
+  color-scheme: dark;
+
+  --bulma-scheme-main: var(--page-bg) !important;
+  --bulma-body-background-color: var(--page-bg) !important;
+  --bulma-body-color: var(--page-text) !important;
+  --bulma-text: var(--page-text) !important;
+  --bulma-title-color: var(--page-text) !important;
+  --bulma-subtitle-color: var(--text-muted) !important;
+  --bulma-navbar-background-color: var(--header-bg) !important;
+  --bulma-card-background-color: var(--surface-bg) !important;
+  --bulma-card-color: var(--page-text) !important;
+  --bulma-box-background-color: var(--surface-bg) !important;
+  --bulma-box-color: var(--page-text) !important;
+
+  --page-bg: #050B0B;
+  --page-text: #ffffff;
+  --header-bg: rgba(5, 11, 11, 0.85);
+  --header-border: #112D2F;
+  --surface-bg: #091617;
+  --surface-border: #112D2F;
+  --surface-strong-bg: #0D1E20;
+  --surface-strong-border: #1A3A3D;
+  --surface-glow-bg: #091617;
+  --surface-glow-border: rgba(11, 72, 77, 0.50);
+
+  --accent-bg: #0B484D;
+  --accent-text: #ffffff;
+  --accent-hover-bg: #0E5C62;
+  --accent-soft-bg: rgba(11, 72, 77, 0.15);
+  --accent-soft-border: rgba(11, 72, 77, 0.30);
+  --neon-text: #14C2C2;
+
+  --secondary-border: #1A3A3D;
+  --secondary-text: rgba(255, 255, 255, 0.60);
+  --secondary-hover-text: #ffffff;
+  --secondary-hover-border: rgba(11, 72, 77, 0.60);
+  --text-muted: rgba(255, 255, 255, 0.65);
+  --text-soft: rgba(255, 255, 255, 0.35);
+
+  --section-tint: #071111;
+  --line-border: #112D2F;
+  --bar-track: rgba(255, 255, 255, 0.10);
+  --bar-fill: #0B484D;
+  --tag-bg: #091617;
+  --tag-border: #1A3A3D;
+  --tag-text: rgba(255, 255, 255, 0.70);
+  --eyebrow-bg: rgba(11, 72, 77, 0.10);
+  --eyebrow-border: rgba(11, 72, 77, 0.30);
+  --eyebrow-text: #14C2C2;
+
+  --card-shadow: 0 0 24px rgba(11, 72, 77, 0.2), 0 0 60px rgba(11, 72, 77, 0.1);
+  --hover-shadow: 0 0 32px rgba(11, 72, 77, 0.25);
+  --cta-shadow: 0 0 80px rgba(11, 72, 77, 0.15), 0 0 160px rgba(20, 194, 194, 0.1);
+
+  --danger-text: #ff7b7b;
+  --danger-soft-bg: rgba(255, 90, 90, 0.10);
+  --danger-soft-border: rgba(255, 90, 90, 0.30);
+}
